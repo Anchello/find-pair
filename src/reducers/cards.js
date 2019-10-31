@@ -1,4 +1,4 @@
-import { InitialState, ActionTypes } from '../constants';
+import { InitialState, ActionTypes, COUNT_CARDS_IN_PAIR } from '../constants';
 
 const cards = (state = InitialState.cards, action) => {
   switch (action.type) {
@@ -10,6 +10,21 @@ const cards = (state = InitialState.cards, action) => {
           .map((card) => ({ id: card.id, name: card.name }))],
         total: state.total.map((card) => ((card.id === action.id)
           ? { ...card, isClosed: false } : card)),
+      };
+    case ActionTypes.CLOSE_CARD:
+      return {
+        ...state,
+        isOpened: [],
+        total: state.total.map((card) => ((!card.isClosed)
+          ? { ...card, isClosed: true } : card)),
+      };
+    case ActionTypes.HIDE_CARD:
+      return {
+        ...state,
+        isOpened: [],
+        visibleCounts: state.visibleCounts - COUNT_CARDS_IN_PAIR,
+        total: state.total.map((card) => ((!card.isHided && !card.isClosed)
+          ? { ...card, isHided: true } : card)),
       };
     case ActionTypes.RECEIVE_CARDS:
       return {

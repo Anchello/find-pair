@@ -1,24 +1,48 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { openCard } from '../actions';
+import { openCard, closeCard, hideCard } from '../actions';
 import Cards from '../components/Cards';
+import { GameOptions, COUNT_CARDS_IN_PAIR } from '../constants';
 
 class CardsContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.timer = null;
+  }
+
   componentDidUpdate(prevProps) {
-    const { isOpened } = this.props;
-    if (prevProps.isOpened.length !== isOpened.length && isOpened.length === 2) {
-      this.isMatсhingCards();
+    const { isOpened, hide } = this.props;
+    this.stopTimout();
+    if (prevProps.isOpened.length !== isOpened.length) {
+      const isOpenPair = isOpened.length === COUNT_CARDS_IN_PAIR;
+      const delayClosing = isOpenPair
+        ? GameOptions.delayClosingPair : GameOptions.delayClosingCard;
+      this.closeCards(delayClosing);
+      if (isOpenPair && this.isMatchingCards()) hide();
     }
+  }
+
+  componentWillUnmount() {
+    this.stopTimout();
   }
 
   onClick = (card) => {
     const { onOpen, isOpened } = this.props;
-    if (isOpened.length === 2 || !card.isClosed) return;
+    if (isOpened.length === COUNT_CARDS_IN_PAIR || !card.isClosed) return;
     onOpen(card.id, card.name);
   };
 
-  isMatсhingCards() {
+  stopTimout() {
+    if (this.timer) clearTimeout(this.timer);
+  }
+
+  closeCards(delay) {
+    const { close } = this.props;
+    this.timer = setTimeout(close, delay);
+  }
+
+  isMatchingCards() {
     const { isOpened } = this.props;
     const [first, second] = [isOpened[0], isOpened[1]];
     return first.name.number === second.name.number && first.name.suit === second.name.suit;
@@ -39,6 +63,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onOpen: (id, name) => dispatch(openCard(id, name)),
+  close: () => dispatch(closeCard()),
+  hide: () => dispatch(hideCard()),
 });
 
 CardsContainer.propTypes = {
@@ -53,6 +79,8 @@ CardsContainer.propTypes = {
     name: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired).isRequired,
   onOpen: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  hide: PropTypes.func.isRequired,
 };
 
 export default connect(

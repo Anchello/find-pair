@@ -7,28 +7,33 @@ import { startTimer } from '../actions';
 const intervalLength = 1000;
 
 class TimerContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.interval = null;
+  }
+
   componentDidMount() {
-    this.startTimer();
+    this.start();
   }
 
   componentWillUnmount() {
-    this.stopTimer();
+    this.stop();
   }
 
-  stopTimer = () => {
+  stop() {
     if (this.interval) clearInterval(this.interval);
-  };
+  }
 
-  startTimer = () => {
+  start() {
     const { tick } = this.props;
     this.interval = setInterval(tick, intervalLength);
-  };
+  }
 
   render() {
-    const { remainingTime } = this.props;
-    if (!remainingTime) this.stopTimer();
+    const { remainingTime, isFinish } = this.props;
+    if (isFinish) this.stop();
     return (
-      <Timer remainingTime={remainingTime} />
+      <Timer remainingTime={remainingTime} isFinish={isFinish} />
     );
   }
 }
@@ -43,12 +48,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+TimerContainer.propTypes = {
+  remainingTime: PropTypes.number.isRequired,
+  tick: PropTypes.func.isRequired,
+  isFinish: PropTypes.bool.isRequired,
+};
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(TimerContainer);
-
-TimerContainer.propTypes = {
-  remainingTime: PropTypes.number.isRequired,
-  tick: PropTypes.func.isRequired,
-};

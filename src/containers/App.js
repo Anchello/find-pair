@@ -1,9 +1,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-
-import TimerContainer from './TimerContainer';
-import CardsContainer from './CardsContainer';
+import Game from './Game';
 import combineReducers from '../reducers';
 import { receiveCards } from '../actions';
 import getRandomCards from '../data/playing-cards';
@@ -16,8 +14,7 @@ store.dispatch(receiveCards(cards));
 const App = () => (
   <main>
     <Provider store={store}>
-      <TimerContainer />
-      <CardsContainer />
+      <Game />
     </Provider>
   </main>
 );

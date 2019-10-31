@@ -14,20 +14,15 @@ export const openCard = (id, name) => ({
   name,
 });
 
-export const closeCard = (id, name) => ({
+export const closeCard = () => ({
   type: ActionTypes.CLOSE_CARD,
-  id,
-  name,
+});
+
+export const hideCard = () => ({
+  type: ActionTypes.HIDE_CARD,
 });
 
 export const receiveCards = (cards) => ({
   type: ActionTypes.RECEIVE_CARDS,
   cards,
 });
-
-// export const getAllCards = () => (dispatch) => {
-//   const cards = getRandomCards();
-//   shop.getProducts(cards => {
-//     dispatch(receiveCards(cards))
-//   });
-// }
