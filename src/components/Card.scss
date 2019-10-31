@@ -1,0 +1,24 @@
+.card {
+  flex: 0 0 16.66%;
+  padding: 10px;
+
+  &__item {
+    display: inline-block;
+    min-height: 80px;
+    width: 100%;
+    outline: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    
+    &--is-closed {
+      background-color: #c1bccc;
+      color: transparent;
+    }
+
+    &--is-hided {
+      visibility: hidden;
+    }
+  }
+}

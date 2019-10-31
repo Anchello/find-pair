@@ -17,7 +17,7 @@ const isFinishing = (remainingTime) => remainingTime < 30;
 const Timer = ({ remainingTime }) => {
   const timerValue = getTimerValue(remainingTime);
   return (
-    <div>
+    <header>
       <div className={classNames('timer', {
         'timer--is-finishing': isFinishing(remainingTime),
       })}
@@ -28,7 +28,7 @@ const Timer = ({ remainingTime }) => {
         <span className="timer__dots">:</span>
         <span className="timer__value">{timerValue.sec}</span>
       </div>
-    </div>
+    </header>
   );
 };
 
