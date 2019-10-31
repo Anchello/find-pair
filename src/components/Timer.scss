@@ -1,0 +1,25 @@
+.timer {
+  text-align: center;
+  font-size: 24px;
+
+  &__dots {
+    animation: blink 1s ease-in-out infinite;
+  }
+
+  &--is-finishing {
+    color: #de1f1f;
+  }
+
+  &--is-finished .timer__dots {
+    animation: none;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

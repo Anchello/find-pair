@@ -11,22 +11,11 @@ const Modal = ({ children, title, open = false }) => (
           &times;
         </button>
         <div className="modal__header">
-          {' '}
           {title}
-          {' '}
         </div>
         <div className="modal__content">
           {children}
         </div>
-        {/* <button */}
-        {/*  type="button" */}
-        {/*  className="modal__button" */}
-        {/*  onClick={() => { */}
-        {/*    close(); */}
-        {/*  }} */}
-        {/* > */}
-        {/*  close modal */}
-        {/* </button> */}
       </div>
     )}
   </Popup>
@@ -35,6 +24,7 @@ const Modal = ({ children, title, open = false }) => (
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   open: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Modal;

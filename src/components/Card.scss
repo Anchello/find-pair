@@ -1,6 +1,7 @@
 .card {
   flex: 0 0 16.66%;
   padding: 10px;
+  max-width: 150px;
 
   &__item {
     display: inline-block;
@@ -11,9 +12,20 @@
     border-radius: 10px;
     font-size: 14px;
     font-weight: 500;
+    border: none;
+    cursor: pointer;
+
+    &:active {
+      outline: none;
+      border: none;
+    }
     
     &--is-closed {
       background-color: #c1bccc;
+      background-image: url('../media/deck_card.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
       color: transparent;
     }
 

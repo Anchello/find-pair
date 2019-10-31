@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import './Timer.scss';
 
 const addZero = (num) => ((num < 10) ? `0${num}` : num);
 
@@ -12,23 +13,22 @@ const getTimerValue = (remainingTime) => {
   };
 };
 
-const isFinishing = (remainingTime) => remainingTime < 30;
+const isFinishing = (remainingTime) => remainingTime && remainingTime < 30;
 
-const Timer = ({ remainingTime }) => {
+const Timer = ({ remainingTime, isFinish }) => {
   const timerValue = getTimerValue(remainingTime);
   return (
-    <header>
-      <div className={classNames('timer', {
-        'timer--is-finishing': isFinishing(remainingTime),
-      })}
-      >
-        <span className="timer__value">
-          {timerValue.min}
-        </span>
-        <span className="timer__dots">:</span>
-        <span className="timer__value">{timerValue.sec}</span>
-      </div>
-    </header>
+    <div className={classNames('timer', {
+      'timer--is-finishing': isFinishing(remainingTime),
+      'timer--is-finished': isFinish,
+    })}
+    >
+      <span className="timer__value">
+        {timerValue.min}
+      </span>
+      <span className="timer__dots">:</span>
+      <span className="timer__value">{timerValue.sec}</span>
+    </div>
   );
 };
 
@@ -39,6 +39,7 @@ Timer.defaultProps = {
 
 Timer.propTypes = {
   remainingTime: PropTypes.number,
+  isFinish: PropTypes.bool.isRequired,
 };
 
 export default Timer;
