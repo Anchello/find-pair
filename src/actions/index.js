@@ -4,10 +4,6 @@ export const startTimer = () => ({
   type: ActionTypes.START_TIMER,
 });
 
-export const stopTimer = () => ({
-  type: ActionTypes.STOP_TIMER,
-});
-
 export const openCard = (id, name) => ({
   type: ActionTypes.OPEN_CARD,
   id,
