@@ -2,6 +2,7 @@
   "name": "find-pair",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://anchello.github.io/find-pair/",
   "dependencies": {
     "gh-pages": "^2.2.0",
     "node-sass": "^4.13.0",
