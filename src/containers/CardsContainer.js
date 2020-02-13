@@ -27,10 +27,10 @@ class CardsContainer extends React.Component {
     this.stopTimout();
   }
 
-  onClick = (card) => {
-    const { onOpen, isOpened } = this.props;
+  handleClick = (card) => {
+    const { open, isOpened } = this.props;
     if (isOpened.length === COUNT_CARDS_IN_PAIR || !card.isClosed) return;
-    onOpen(card.id, card.name);
+    open(card.id, card.name);
   };
 
   stopTimout() {
@@ -51,7 +51,7 @@ class CardsContainer extends React.Component {
   render() {
     const { cards } = this.props;
     return (
-      <Cards cards={cards} onOpen={this.onClick} />
+      <Cards cards={cards} onClick={this.handleClick} />
     );
   }
 }
@@ -62,7 +62,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onOpen: (id, name) => dispatch(openCard(id, name)),
+  open: (id, name) => dispatch(openCard(id, name)),
   close: () => dispatch(closeCard()),
   hide: () => dispatch(hideCard()),
 });
@@ -73,12 +73,13 @@ CardsContainer.propTypes = {
     isClosed: PropTypes.bool.isRequired,
     isHided: PropTypes.bool.isRequired,
     name: PropTypes.objectOf(PropTypes.string).isRequired,
+    imgSrc: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   isOpened: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired).isRequired,
-  onOpen: PropTypes.func.isRequired,
+  open: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   hide: PropTypes.func.isRequired,
 };

@@ -1,12 +1,13 @@
 import { GameOptions } from '../constants';
 
-const numbers = ['ace', 'king', 'queen', 'jack', '10', '9', '8', '7', '6'];
-const suits = ['heart', 'diamond', 'spade', 'club'];
+const numbers = ['ace', 'king', 'queen', 'jack', 'ten', 'nine', 'eight', 'seven', 'six'];
+const suits = ['heart', 'diamond', 'spades', 'club'];
 
 const getPlayingCards = () => {
   const cards = [];
   suits.forEach((suit) => {
     numbers.forEach((number) => cards.push({
+      imgSrc: `media/cards/${number}_${suit}.png`,
       name: {
         number,
         suit,
