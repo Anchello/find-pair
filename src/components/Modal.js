@@ -3,7 +3,8 @@ import Popup from 'reactjs-popup';
 import PropTypes from 'prop-types';
 import './Modal.scss';
 
-const Modal = ({ children, title, open = false }) => (
+const Modal = ({ children, title, open = false }) => {
+  return (
   <Popup open={open} modal>
     {(close) => (
       <div className="modal">
@@ -19,7 +20,7 @@ const Modal = ({ children, title, open = false }) => (
       </div>
     )}
   </Popup>
-);
+);}
 
 Modal.propTypes = {
   children: PropTypes.node.isRequired,

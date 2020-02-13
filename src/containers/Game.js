@@ -7,8 +7,7 @@ import CardsContainer from './CardsContainer';
 import Result from '../components/Result';
 import Header from '../components/Header';
 
-const Game = ({ remainingTime, visibleCounts }) => {
-  const isFinish = !remainingTime || !visibleCounts;
+const Game = ({ remainingTime, visibleCounts, isFinish }) => {
   return (
     <>
       <Header />
@@ -23,6 +22,7 @@ const Game = ({ remainingTime, visibleCounts }) => {
 const mapStateToProps = (state) => ({
   remainingTime: state.timer,
   visibleCounts: state.cards.visibleCounts,
+  isFinish: !state.timer || !state.cards.visibleCounts,
 });
 
 Game.propTypes = {
