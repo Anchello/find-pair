@@ -2,29 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './Card.scss';
-import ImgDeck from '../media/deck.png';
 
 const Card = ({
-  onClick, isClosed, isHided, imgSrc,
-}) => {
-  const bgImgSrc = isClosed ? ImgDeck : `${process.env.PUBLIC_URL}/${imgSrc}`;
-  return (
-  <li className="card">
+  onClick, isClosed, isHidden, imgSrc,
+}) => (
+  <li className={classNames('card', {
+    'card--is-hidden': isHidden,
+    'card--is-opened': !isClosed,
+  })}
+  >
     <button
       type="button"
       onClick={onClick}
-      className={classNames('card__item', {
-        'card__item--is-hided': isHided,
-      })}
-      style={{ backgroundImage: `url(${bgImgSrc})` }}
+      className="card__item card__item--back"
+    />
+    <button
+      type="button"
+      onClick={onClick}
+      className="card__item card__item--front"
+      style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/${imgSrc})` }}
     />
   </li>
-);}
+);
 
 Card.propTypes = {
   onClick: PropTypes.func.isRequired,
   isClosed: PropTypes.bool.isRequired,
-  isHided: PropTypes.bool.isRequired,
+  isHidden: PropTypes.bool.isRequired,
   imgSrc: PropTypes.string.isRequired,
 };
 

@@ -1,23 +1,41 @@
 .card {
   flex: 0 0 16.66%;
-  padding: 10px;
-  min-width: 90px;
-  min-height: 120px;
+  margin: 10px;
+  min-width: 70px;
+  min-height: 100px;
+  position: relative;
 
   @media screen and (min-width: 600px)  {
-    max-width: 105px;
-    min-height: 140px;
+    max-width: 90px;
+    min-height: 125px;
   }
 
   @media screen and (min-width: 1080px)  {
-    max-width: 120px;
-    min-height: 160px;
+    max-width: 100px;
+    min-height: 140px;
+  }
+
+
+  &--is-hidden {
+    visibility: hidden;
+  }
+
+  &--is-opened {
+    .card__item--back {
+      transform: perspective(600px) rotateY(180deg);
+    }
+
+    .card__item--front {
+      transform: perspective(600px) rotateY(180deg) rotateY(180deg);
+    }
   }
 
   &__item {
     display: inline-block;
     width: 100%;
     height: 100%;
+    padding: 0;
+    margin: 0;
     outline: 0;
     background-color: #fff;
     border-radius: 10px;
@@ -28,14 +46,22 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 300ms;
 
     &:active {
       outline: none;
       border: none;
     }
 
-    &--is-hided {
-      visibility: hidden;
+    &--front {
+      transform: perspective(600px) rotateY(0deg) rotateY(180deg);
+    }
+
+    &--back {
+      background-image: url('../media/deck.png');
+      transform: perspective(600px) rotateY(0deg);
     }
 
     img {

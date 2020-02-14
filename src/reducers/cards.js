@@ -23,13 +23,13 @@ const cards = (state = InitialState.cards, action) => {
         ...state,
         isOpened: [],
         visibleCounts: state.visibleCounts - COUNT_CARDS_IN_PAIR,
-        total: state.total.map((card) => ((!card.isHided && !card.isClosed)
-          ? { ...card, isHided: true } : card)),
+        total: state.total.map((card) => ((!card.isHidden && !card.isClosed)
+          ? { ...card, isHidden: true } : card)),
       };
     case ActionTypes.RECEIVE_CARDS:
       return {
         ...state,
-        total: action.cards.map((card) => ({ ...card, isClosed: true, isHided: false })),
+        total: action.cards.map((card) => ({ ...card, isClosed: true, isHidden: false })),
       };
     default:
       return state;

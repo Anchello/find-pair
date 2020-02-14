@@ -71,7 +71,7 @@ CardsContainer.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     isClosed: PropTypes.bool.isRequired,
-    isHided: PropTypes.bool.isRequired,
+    isHidden: PropTypes.bool.isRequired,
     name: PropTypes.objectOf(PropTypes.string).isRequired,
     imgSrc: PropTypes.string.isRequired,
   }).isRequired).isRequired,

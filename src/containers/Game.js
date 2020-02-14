@@ -28,6 +28,7 @@ const mapStateToProps = (state) => ({
 Game.propTypes = {
   remainingTime: PropTypes.number.isRequired,
   visibleCounts: PropTypes.number.isRequired,
+  isFinish: PropTypes.bool.isRequired,
 };
 
 export default connect(
