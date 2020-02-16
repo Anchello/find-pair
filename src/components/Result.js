@@ -9,12 +9,12 @@ const Result = ({
 }) => {
   const isWin = remainingTime && !visibleCounts;
   return (
-    <Modal open={isOpen} title="Результаты игры:">
+    <Modal open={isOpen}>
       <p className={classNames('result', {
         'result--is-loser': !isWin,
       })}
       >
-        {isWin ? 'Ура! Вы выиграли! 🎉' : 'К сожалению вы проиграли, Вам не хватило время 😟 Попробуйте еще раз!'}
+        {isWin ? 'Yeah! You won! 🎉' : `Unfortunately you lost, you didn't have enough time 😟 Try again!`}
       </p>
     </Modal>
   );

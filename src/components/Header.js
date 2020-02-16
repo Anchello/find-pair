@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => (
   <header>
-    <h1>Найди пару</h1>
+    <h1>Find a pair</h1>
   </header>
 );
 
