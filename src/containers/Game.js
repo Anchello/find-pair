@@ -5,12 +5,10 @@ import PropTypes from 'prop-types';
 import TimerContainer from './TimerContainer';
 import CardsContainer from './CardsContainer';
 import Result from '../components/Result';
-import Header from '../components/Header';
 
 const Game = ({ remainingTime, visibleCounts, isFinish }) => {
   return (
     <>
-      <Header />
       <TimerContainer isFinish={isFinish} />
       {isFinish
         ? <Result remainingTime={remainingTime} visibleCounts={visibleCounts} isOpen />

@@ -5,6 +5,7 @@ import Game from './Game';
 import combineReducers from '../reducers';
 import { receiveCards } from '../actions';
 import getRandomCards from '../data/playing-cards';
+import Header from '../components/Header';
 
 const store = createStore(combineReducers);
 
@@ -14,6 +15,7 @@ store.dispatch(receiveCards(cards));
 const App = () => (
   <main>
     <Provider store={store}>
+      <Header />
       <Game />
     </Provider>
   </main>
