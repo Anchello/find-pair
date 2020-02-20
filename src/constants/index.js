@@ -10,6 +10,7 @@ export const ActionTypes = {
 const COUNT_PAIR = 18;
 export const COUNT_CARDS_IN_PAIR = 2;
 export const COUNT_ONE_CARD = 1;
+export const MS_IN_ONE_MIN = 1000;
 
 export const GameOptions = {
   countPair: COUNT_PAIR,

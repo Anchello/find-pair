@@ -1,42 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Timer from '../components/Timer';
 import { startTimer } from '../actions';
+import { MS_IN_ONE_MIN } from '../constants';
 
-const intervalLength = 1000;
-
-class TimerContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.interval = null;
-  }
-
-  componentDidMount() {
-    this.start();
-  }
-
-  componentWillUnmount() {
-    this.stop();
-  }
-
-  stop() {
-    if (this.interval) clearInterval(this.interval);
-  }
-
-  start() {
-    const { tick } = this.props;
-    this.interval = setInterval(tick, intervalLength);
-  }
-
-  render() {
-    const { remainingTime, isFinish } = this.props;
-    if (isFinish) this.stop();
-    return (
-      <Timer remainingTime={remainingTime} isFinish={isFinish} />
-    );
-  }
-}
+const TimerContainer = ({
+  remainingTime, tick, isFinish,
+}) => {
+  const intervalRef = useRef(0);
+  useEffect(() => {
+    if (!isFinish) {
+      intervalRef.current = setInterval(tick, MS_IN_ONE_MIN);
+    }
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, [tick, isFinish]);
+  return (
+    <Timer remainingTime={remainingTime} isFinish={isFinish} />
+  );
+};
 
 const mapStateToProps = (state) => ({
   remainingTime: state.timer,

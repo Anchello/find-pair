@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { openCard, closeCard, hideCard } from '../actions';
@@ -19,6 +19,7 @@ const getDelayClosingCard = (countIsOpened) => {
 const CardsContainer = ({
   cards, isOpened, countIsOpened, open, close, hide,
 }) => {
+  const timerRef = useRef(0);
   const handleClick = useCallback((card) => {
     if (countIsOpened === COUNT_CARDS_IN_PAIR || !card.isClosed) return;
     open(card.id, card.name);
@@ -30,13 +31,12 @@ const CardsContainer = ({
   }, [isOpened]);
 
   useEffect(() => {
-    let timer;
     const delayClosing = getDelayClosingCard(countIsOpened);
     if (delayClosing) {
-      timer = setTimeout(close, delayClosing);
+      timerRef.current = setTimeout(close, delayClosing);
     }
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timerRef.current);
     };
   }, [countIsOpened, close]);
 
