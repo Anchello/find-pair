@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Timer from '../components/Timer';
@@ -8,13 +8,13 @@ import { MS_IN_ONE_MIN } from '../constants';
 const TimerContainer = ({
   remainingTime, tick, isFinish,
 }) => {
-  const intervalRef = useRef(0);
   useEffect(() => {
+    let interval = null;
     if (!isFinish) {
-      intervalRef.current = setInterval(tick, MS_IN_ONE_MIN);
+      interval = setInterval(tick, MS_IN_ONE_MIN);
     }
     return () => {
-      clearInterval(intervalRef.current);
+      clearInterval(interval);
     };
   }, [tick, isFinish]);
   return (
