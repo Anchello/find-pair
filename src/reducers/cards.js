@@ -1,3 +1,4 @@
+import { getOpenedCards, getReceivedTotalCards } from './helpers';
 import { InitialState, ActionTypes, COUNT_CARDS_IN_PAIR } from '../constants';
 
 const cards = (state = InitialState.cards, action) => {
@@ -5,9 +6,7 @@ const cards = (state = InitialState.cards, action) => {
     case ActionTypes.OPEN_CARD:
       return {
         ...state,
-        isOpened: [...state.isOpened, ...state.total
-          .filter((card) => (card.id === action.id))
-          .map((card) => ({ id: card.id, name: card.name }))],
+        isOpened: [...state.isOpened, ...getOpenedCards(state.total, action)],
         total: state.total.map((card) => ((card.id === action.id)
           ? { ...card, isClosed: false } : card)),
       };
@@ -29,7 +28,12 @@ const cards = (state = InitialState.cards, action) => {
     case ActionTypes.RECEIVE_CARDS:
       return {
         ...state,
-        total: action.cards.map((card) => ({ ...card, isClosed: true, isHidden: false })),
+        total: getReceivedTotalCards(action.cards),
+      };
+    case ActionTypes.RESET:
+      return {
+        ...InitialState.cards,
+        total: getReceivedTotalCards(action.cards),
       };
     default:
       return state;

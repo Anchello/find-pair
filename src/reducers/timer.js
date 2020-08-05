@@ -1,10 +1,14 @@
 import { InitialState, ActionTypes } from '../constants';
 
 const timer = (state = InitialState.timer, action) => {
-  if (action.type === ActionTypes.START_TIMER) {
-    return state - 1;
+  switch (action.type) {
+    case ActionTypes.START_TIMER:
+      return state - 1;
+    case ActionTypes.RESET:
+      return InitialState.timer;
+    default:
+      return state;
   }
-  return state;
 };
 
 export default timer;

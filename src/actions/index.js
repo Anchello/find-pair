@@ -22,3 +22,8 @@ export const receiveCards = (cards) => ({
   type: ActionTypes.RECEIVE_CARDS,
   cards,
 });
+
+export const resetGame = (cards) => ({
+  type: ActionTypes.RESET,
+  cards,
+});
