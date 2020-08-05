@@ -5,33 +5,37 @@
   background-color: rgba(75, 111, 138, 0.5);
   top: 0;
   left: 0;
+  overflow: auto;
 }
 
 .modal {
   color: #fff;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
   background-color: #243b4c;
   font-size: 20px;
   padding: 30px;
   width: 100%;
+  //overflow: auto;
+  top: 0;
+  left: 0;
 
-  @media screen and (min-width: 400px)  {
-    max-width: 400px;
+  @media screen and (min-width: 600px)  {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 600px;
+    width: auto;
     border-radius: 10px;
   }
 
   &__header {
     width: 100%;
-    font-size: 18px;
     text-align: center;
-    font-weight: 700;
   }
 
   &__content {
     width: 100%;
+    text-align: center;
   }
 
   &__close {
@@ -42,14 +46,14 @@
     width: 20px;
     height: 20px;
     padding: 0;
-    right: 0;
-    top: 0;
+    right: 10px;
+    top: 10px;
     transform: rotateZ(45deg);
     background-color: transparent;
     border: none;
     will-change: transform;
 
-    @media screen and (min-width: 400px)  {
+    @media screen and (min-width: 600px)  {
       right: -20px;
       top: -20px;
     }

@@ -17,9 +17,9 @@ const Modal = ({ children, title, open }) => {
           <span className="modal__close-line" />
         </button>
         {title && (
-        <div className="modal__header">
+        <h2 className="modal__header">
           {title}
-        </div>
+        </h2>
         )}
         <div className="modal__content">
           {children}
