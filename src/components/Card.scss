@@ -48,7 +48,7 @@
     background-position: center;
     position: absolute;
     backface-visibility: hidden;
-    transition: transform 300ms;
+    transition: transform 0.3s;
 
     &:active {
       border: none;

@@ -27,9 +27,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  tick: () => {
-    dispatch(startTimer());
-  },
+  tick: () => dispatch(startTimer()),
 });
 
 TimerContainer.propTypes = {

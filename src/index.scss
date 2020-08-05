@@ -31,3 +31,29 @@ main {
 header {
   text-align: center;
 }
+
+h1, h3 {
+  color: #f8c874;
+}
+
+
+.button {
+  transition: color, background-color 0.3s;
+  color: #2b4558;
+  background-color: #f8c874;
+  padding: 15px;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+
+  &:hover {
+    background-color: rgba(75, 111, 138, 0.5);
+    color: #f8c874;
+    outline: none;
+    border: none;
+  }
+}
