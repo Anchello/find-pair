@@ -1,4 +1,7 @@
-import { getOpenedCards, getReceivedTotalCards } from './helpers';
+import {
+  getNewOpenedCards, getReceivedTotalCards, setOpenedCards, setClosedCards,
+  setHiddenCards,
+} from './helpers';
 import { InitialState, ActionTypes, COUNT_CARDS_IN_PAIR } from '../constants';
 
 const cards = (state = InitialState.cards, action) => {
@@ -6,24 +9,21 @@ const cards = (state = InitialState.cards, action) => {
     case ActionTypes.OPEN_CARD:
       return {
         ...state,
-        isOpened: [...state.isOpened, ...getOpenedCards(state.total, action)],
-        total: state.total.map((card) => ((card.id === action.id)
-          ? { ...card, isClosed: false } : card)),
+        isOpened: [...state.isOpened, ...getNewOpenedCards(state.total, action.id)],
+        total: setOpenedCards(state.total, action.id),
       };
     case ActionTypes.CLOSE_CARD:
       return {
         ...state,
         isOpened: [],
-        total: state.total.map((card) => ((!card.isClosed)
-          ? { ...card, isClosed: true } : card)),
+        total: setClosedCards(state.total),
       };
     case ActionTypes.HIDE_CARD:
       return {
         ...state,
         isOpened: [],
         visibleCounts: state.visibleCounts - COUNT_CARDS_IN_PAIR,
-        total: state.total.map((card) => ((!card.isHidden && !card.isClosed)
-          ? { ...card, isHidden: true } : card)),
+        total: setHiddenCards(state.total),
       };
     case ActionTypes.RECEIVE_CARDS:
       return {
